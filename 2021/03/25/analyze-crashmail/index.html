@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="PurposeA crash mail is sent when meeting app collapses. The number of mails is quite large, up to 10 thousand. And the quality of mails is varies, most of which only include a error code, while some i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Analyze Crashmail">
+<meta property="og:url" content="https://yang-0209.github.io/2021/03/25/analyze-crashmail/index.html">
+<meta property="og:site_name" content="Yang&#39;Blog">
+<meta property="og:description" content="PurposeA crash mail is sent when meeting app collapses. The number of mails is quite large, up to 10 thousand. And the quality of mails is varies, most of which only include a error code, while some i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-25T02:43:01.000Z">
+<meta property="article:modified_time" content="2021-03-25T08:32:51.290Z">
+<meta property="article:author" content="Yang">
+<meta property="article:tag" content="crawler, oauth">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Analyze Crashmail</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives">Writing</a></li>
+         
+          <li><a href="/gallery">gallery</a></li>
+         
+          <li><a href="/music">music</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/03/23/buildHexoServer/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yang-0209.github.io/2021/03/25/analyze-crashmail/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&text=Analyze Crashmail"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&is_video=false&description=Analyze Crashmail"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Analyze Crashmail&body=Check out this article: https://yang-0209.github.io/2021/03/25/analyze-crashmail/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&name=Analyze Crashmail&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&t=Analyze Crashmail"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Purpose"><span class="toc-number">1.</span> <span class="toc-text">Purpose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collect-Mails"><span class="toc-number">2.</span> <span class="toc-text">Collect Mails</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Analyze Crashmail
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Yang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-25T02:43:01.000Z" itemprop="datePublished">2021-03-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/crawler-oauth/" rel="tag">crawler, oauth</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Purpose"><a href="#Purpose" class="headerlink" title="Purpose"></a>Purpose</h2><p>A crash mail is sent when meeting app collapses. The number of mails is quite large, up to 10 thousand. And the quality of mails is varies, most of which only include a error code, while some include valuable feedback. As a result, these mails need to be collected by a crawler, and their error code need to be analyzed. </p>
+<h2 id="Collect-Mails"><a href="#Collect-Mails" class="headerlink" title="Collect Mails"></a>Collect Mails</h2><p>There are three protocols to introduce: POP3, IMAP, SMTP. SMTP is a protocol to send mail to server. IMAP and POP3 are related to receive mails. POP3 downloads all mails to local mailbox. Local operations, delete, move and so on, will not change the mails saved in server. While the IMAP protocol is common among enterprise’s mail box, as it syncs mails for each terminal, keeping all infos up-to-date. </p>
+<p>So here are two ideas to collect mails: obtain mails through local mailbox, or login remote mailbox directly to get mails. However, MacOS do not support win32lib to operate the outlook app and the export button is disabled by system probably due to the one of security mechanism in cisco. So the first method, export mails manually, is not feasible. There is an existing lib with high stars to login office 365 with imaplib, but actully it fails to login with the account, for the microsoft no longer changes the strategy to login office 365. They update the auth method recently to support Oauth2.0, which is much more complicated than username-and-password method. An approach is to build a Oauth connection and acquire mails. </p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>After a day‘s research, the collection of crash mails conflicts Cisco’s data protection. As a result, although the idea to analyze crashmail is feasible, I decided to give up it. </p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives">Writing</a></li>
+         
+          <li><a href="/gallery">gallery</a></li>
+         
+          <li><a href="/music">music</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Purpose"><span class="toc-number">1.</span> <span class="toc-text">Purpose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collect-Mails"><span class="toc-number">2.</span> <span class="toc-text">Collect Mails</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yang-0209.github.io/2021/03/25/analyze-crashmail/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&text=Analyze Crashmail"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&is_video=false&description=Analyze Crashmail"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Analyze Crashmail&body=Check out this article: https://yang-0209.github.io/2021/03/25/analyze-crashmail/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&title=Analyze Crashmail"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&name=Analyze Crashmail&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yang-0209.github.io/2021/03/25/analyze-crashmail/&t=Analyze Crashmail"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    Yang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives">Writing</a></li>
+         
+          <li><a href="/gallery">gallery</a></li>
+         
+          <li><a href="/music">music</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
